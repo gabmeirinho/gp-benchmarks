@@ -9,3 +9,6 @@ results/
 
 #logs
 logs/
+
+#eda
+notebooks/eda.ipynb
