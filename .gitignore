@@ -1,0 +1,11 @@
+#virtual environment
+.venv/
+
+#data files
+data/
+
+#experiment outputs
+results/
+
+#logs
+logs/

@@ -1,0 +1,33 @@
+[project]
+name="GP-benchmark"
+version="0.1.0"
+requires-python=">=3.12"
+authors=[
+    {name="Gabriel Meirinho", email="gsilva.meirinho@gmail.com"}
+]
+dependencies = [
+    "geneticengine",
+    "m3gp",
+    "m6gp",
+    "ipykernel>=6.30.1",
+    "matplotlib>=3.10.6",
+    "numpy>=2.2.6",
+    "optuna",
+    "pandas>=2.3.1",
+    "pyyaml",
+    "scikit-learn>=1.6.1",
+    "seaborn>=0.13.2",
+    "aequitas",
+    "kagglehub>=0.3.13",
+    "ucimlrepo",
+    "statsmodels==0.14.5",
+]
+
+[tool.uv.sources]
+geneticengine = {path = "../GeneticEngine", editable=true}
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.1",
+    "uv>=0.9.5",
+]
