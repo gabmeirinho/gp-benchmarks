@@ -45,7 +45,7 @@ import matplotlib.pyplot as plt
 from sklearn.feature_selection import RFECV, f_classif
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = (BASE_DIR / ".." / "datasets").resolve()
+DATA_DIR = (BASE_DIR / ".." ).resolve()
 OUT_DIR = BASE_DIR/""
 
 DEFAULT_TARGET = None
@@ -277,16 +277,22 @@ def run_dataset(
         )
         X_augmented = pd.concat([X_train, new_feature], axis=1)
 
-        scores = []
-        for train_index, val_index in skf.split(X_augmented, y_train):
-            model = RandomForestClassifier(
-                max_depth=6, random_state=seed, class_weight=cw
-            )
-            model.fit(X_augmented.iloc[train_index], y_train.iloc[train_index])
-            pred = model.predict(X_augmented.iloc[val_index])
-            scores.append(f1_score(y_train.iloc[val_index], pred, average="weighted"))
+        # scores = []
+        # for train_index, val_index in skf.split(X_augmented, y_train):
+        #     model = RandomForestClassifier(
+        #         max_depth=6, random_state=seed, class_weight=cw
+        #     )
+        #     model.fit(X_augmented.iloc[train_index], y_train.iloc[train_index])
+        #     pred = model.predict(X_augmented.iloc[val_index])
+        #     scores.append(f1_score(y_train.iloc[val_index], pred, average="weighted"))
 
-        avg_score = float(np.mean(scores))
+        # avg_score = float(np.mean(scores))
+        model = RandomForestClassifier(
+            max_depth=6, random_state=seed, class_weight=cw
+        )
+        model.fit(X_augmented, y_train)
+        pred = model.predict(X_augmented)
+        avg_score = f1_score(y_train, pred, average="weighted")
         unique_features = len(count_features(individual))
         n_nodes = count_nodes(individual)
         return [avg_score, unique_features, n_nodes]
@@ -422,7 +428,7 @@ def run_dataset(
     avg_test_f1_aug_corr = np.mean(runs_scores_aug_corr)
     print(f"Augmented Dataset after Correlation Drop Preliminary Test Weighted F1 over {runs} runs: {avg_test_f1_aug_corr}")
 
-    model = RandomForestClassifier(max_depth=6, random_state=42)
+    model = RandomForestClassifier(max_depth=6, random_state=seed, class_weight=cw)
 
     thresholds = np.arange(0.2, 0.55, 0.05)
     scores = {}

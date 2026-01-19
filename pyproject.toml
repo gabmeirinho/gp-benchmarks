@@ -18,9 +18,10 @@ dependencies = [
     "scikit-learn>=1.6.1",
     "seaborn>=0.13.2",
     "aequitas",
-    "kagglehub>=0.3.13",
+    "kagglehub==0.4.0",
     "ucimlrepo",
     "statsmodels==0.14.5",
+    "ipywidgets",
 ]
 
 [tool.uv.sources]
