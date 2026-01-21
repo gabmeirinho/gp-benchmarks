@@ -2,7 +2,8 @@
 .venv/
 
 #data files
-data/
+data/feedzai/
+data/cloudwalk
 
 #experiment outputs
 results/
