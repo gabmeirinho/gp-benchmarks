@@ -15,7 +15,7 @@ $$f(individual) = [F1_{weighted}, -Count_{features}, -Count_{nodes}]$$
 
 ## Project Structure
 
-*   benchmarks.py: Main benchmarking script including preprocessing, GP search, and post-run evaluation (RFE).
+*   benchmarks.py: Benchmarking script including preprocessing, GP search, and post-run evaluation (RFE).
 *   parser.py: Utility to aggregate and summarize results from multiple seeds.
 *   data: Directory for datasets.
 *   src: SLURM batch scripts for distributed execution.
