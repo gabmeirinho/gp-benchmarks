@@ -277,22 +277,16 @@ def run_dataset(
         )
         X_augmented = pd.concat([X_train, new_feature], axis=1)
 
-        # scores = []
-        # for train_index, val_index in skf.split(X_augmented, y_train):
-        #     model = RandomForestClassifier(
-        #         max_depth=6, random_state=seed, class_weight=cw
-        #     )
-        #     model.fit(X_augmented.iloc[train_index], y_train.iloc[train_index])
-        #     pred = model.predict(X_augmented.iloc[val_index])
-        #     scores.append(f1_score(y_train.iloc[val_index], pred, average="weighted"))
+        scores = []
+        for train_index, val_index in skf.split(X_augmented, y_train):
+            model = RandomForestClassifier(
+                max_depth=6, random_state=seed, class_weight=cw
+            )
+            model.fit(X_augmented.iloc[train_index], y_train.iloc[train_index])
+            pred = model.predict(X_augmented.iloc[val_index])
+            scores.append(f1_score(y_train.iloc[val_index], pred, average="weighted"))
 
-        # avg_score = float(np.mean(scores))
-        model = RandomForestClassifier(
-            max_depth=6, random_state=seed, class_weight=cw
-        )
-        model.fit(X_augmented, y_train)
-        pred = model.predict(X_augmented)
-        avg_score = f1_score(y_train, pred, average="weighted")
+        avg_score = float(np.mean(scores))
         unique_features = len(count_features(individual))
         n_nodes = count_nodes(individual)
         return [avg_score, unique_features, n_nodes]
