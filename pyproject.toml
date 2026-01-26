@@ -22,6 +22,10 @@ dependencies = [
     "ucimlrepo",
     "statsmodels==0.14.5",
     "ipywidgets",
+    "polars",
+    "plotly",
+    "nbformat",
+    "pyarrow",
 ]
 
 [tool.uv.sources]
